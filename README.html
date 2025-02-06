@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.11">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>readme</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="README_files/libs/clipboard/clipboard.min.js"></script>
+<script src="README_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="README_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="README_files/libs/quarto-html/popper.min.js"></script>
+<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="README_files/libs/quarto-html/anchor.min.js"></script>
+<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-73e053f00451a6823eaeab9714ac17cd.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="README_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="labor-ledger-dapp-overview" class="level2">
+<h2 class="anchored" data-anchor-id="labor-ledger-dapp-overview">Labor Ledger dApp Overview</h2>
+<p>Labor Ledger is a decentralized application designed to create, manage, and monitor fair working conditions through smart contracts. It combines multiple components to ensure transparent, verifiable, and equitable work arrangements while protecting worker rights and enabling efficient dispute resolution.</p>
+<pre class="mermaid"><code>---
+title: Labor Ledger System Flow
+---
+flowchart TD
+    %% Entry Points at same level
+    EMP[Employer]
+    WRK[Worker]
+    
+    %% Landing Pages at same level
+    EL[Employer Landing]
+    WL[Worker Landing]
+    
+    %% Connect top levels
+    EMP --&gt; EL
+    WRK --&gt; WL
+    
+    %% Main Flow - Contract Creation First
+    EL --&gt; |Create| CF[Contract Factory]
+    CF --&gt; |Configure| REQ[Requirements&lt;br/&gt;- Payment Structure&lt;br/&gt;- Compliance Rules&lt;br/&gt;- Work Verification]
+    CF --&gt; |Deploy| JP[Job Posting]
+    
+    %% Worker Application Flow - Direct to Job Posting
+    WL --&gt; |View &amp; Apply| JP
+    
+    %% Rest of flow
+    JP --&gt; |Screen| APP[Application&lt;br/&gt;- Check Reputation&lt;br/&gt;- Verify Compliance]
+    APP --&gt; |Accept| CON[Work Contract]
+    
+    %% Contract Lifecycle
+    CON --&gt; |Deploy| ESC[Escrow System]
+    CON --&gt; |Execute| WORK[Work Period]
+    
+    %% Monitoring Systems
+    WORK --&gt; |Verify| ORC[Oracle Network&lt;br/&gt;GPS/Image/Weight/Time]
+    WORK --&gt; |Monitor| CMP[Compliance System]
+    WORK --&gt; |Collect| SUR[Survey System]
+    
+    %% Resolution Paths
+    WORK --&gt; |If Dispute| DIS[Dispute Resolution&lt;br/&gt;- Arbitration&lt;br/&gt;- Grievance System]
+    WORK --&gt; |If Complete| PAY[Payment Release]
+    
+    %% DAO Oversight
+    DAO[Worker/Employer DAOs] --&gt; |Govern| DIS
+    DAO --&gt; |Monitor| CMP
+    
+    %% Completion
+    PAY --&gt; |Update| REP[Reputation System]
+
+    %% Styling
+    classDef user fill:#4a69bd,stroke:#333,stroke-width:4px,color:#fff
+    classDef primary fill:#dfd,stroke:#333,color:#000
+    classDef system fill:#e6e6ff,stroke:#333,color:#000
+    classDef process fill:#fff,stroke:#333,color:#000
+    
+    class EMP,WRK user
+    class JP,CON,WORK primary
+    class CF,ESC,ORC,CMP,SUR,DIS,DAO system
+    class EL,WL,APP,PAY,REP process</code></pre>
+</section>
+<section id="core-components" class="level2">
+<h2 class="anchored" data-anchor-id="core-components">Core Components</h2>
+<section id="work-contracts" class="level3">
+<h3 class="anchored" data-anchor-id="work-contracts">Work Contracts</h3>
+<p>At the heart of the system is the WorkContract, which manages the relationship between workers and employers. Each contract integrates with various modules to handle: - Payments and escrow - Work verification - Grievance handling - Compliance monitoring - Survey management - Reputation tracking</p>
+</section>
+<section id="contract-factory" class="level3">
+<h3 class="anchored" data-anchor-id="contract-factory">Contract Factory</h3>
+<p>The WorkAgreementFactory serves as the main entry point for contract creation, providing: - Template management for different work types - Compliance requirement configuration - Dispute settings management - Stakeholder validation - Initial deposit handling</p>
+</section>
+<section id="decentralized-autonomous-organizations-daos" class="level3">
+<h3 class="anchored" data-anchor-id="decentralized-autonomous-organizations-daos">Decentralized Autonomous Organizations (DAOs)</h3>
+<p>The system features two complementary DAOs:</p>
+<p><strong>WorkerDAO</strong> - Serves as a mutual aid society for workers - Manages welfare fund and benefits - Provides tiered membership (BASIC → ACTIVE → CORE → ELDER) - Participates in dispute resolution - Monitors compliance standards</p>
+<p><strong>EmployerDAO</strong> - Focuses on arbitrator selection - Maintains employer representation - Conducts regular arbitrator elections - Participates in compliance setting - Manages employer reputation standards</p>
+</section>
+<section id="reputation-system" class="level3">
+<h3 class="anchored" data-anchor-id="reputation-system">Reputation System</h3>
+<p>The reputation registry provides comprehensive scoring with: - Multiple scoring factors (completion, timeliness, quality, etc.) - Stake-based reputation weighting - Privacy controls for sensitive data - Score decay over time - Recovery mechanisms for low scores - Appeal process for disputed ratings - Minimum thresholds for contract participation</p>
+</section>
+<section id="grievance-system" class="level3">
+<h3 class="anchored" data-anchor-id="grievance-system">Grievance System</h3>
+<p>The grievance registry provides: - Secure and private reporting channels - Multi-stage resolution tracking (PENDING → IN_MEDIATION → RESOLVED/ESCALATED) - Anonymous reporting options - Evidence management - Integration with arbitration - AI-assisted resolution preparation</p>
+</section>
+<section id="compliance-system" class="level3">
+<h3 class="anchored" data-anchor-id="compliance-system">Compliance System</h3>
+<p>Monitors and enforces: - Working hours and overtime - Minimum wage requirements - Rest period enforcement - Age verification - Insurance requirements - Safety certifications - Regular auditing - Violation reporting</p>
+</section>
+<section id="oracle-network" class="level3">
+<h3 class="anchored" data-anchor-id="oracle-network">Oracle Network</h3>
+<p>The system employs multiple oracle types: - GPSOracle: Validates location and attendance - ImageOracle: Processes visual evidence - WeightOracle: Verifies quantity-based work - TimeClockOracle: Manages time-based verification - MultiOracle: Combines multiple verification methods</p>
+</section>
+<section id="payment-structures" class="level3">
+<h3 class="anchored" data-anchor-id="payment-structures">Payment Structures</h3>
+<p>Supports multiple payment models: - TimeBasedPayment: Hourly/shift-based work - PieceRatePayment: Unit-based compensation - MilestonePayment: Project-based deliverables - CustomPayment: Hybrid payment structures - Escrow management for payment security - Dispute-triggered payment holds</p>
+</section>
+<section id="survey-mechanism" class="level3">
+<h3 class="anchored" data-anchor-id="survey-mechanism">Survey Mechanism</h3>
+<p>Integrated survey system featuring: - Industry-specific questionnaires - Random question selection - Privacy-preserving feedback collection - Compliance monitoring - Working condition assessment - Anonymous reporting options</p>
+</section>
+</section>
+<section id="integration-layer" class="level2">
+<h2 class="anchored" data-anchor-id="integration-layer">Integration Layer</h2>
+<section id="interfaces" class="level3">
+<h3 class="anchored" data-anchor-id="interfaces">Interfaces</h3>
+<p>The system implements comprehensive interfaces: - IWorkerDAO &amp; IEmployerDAO: DAO interactions - IOracle: Work verification - IPaymentStructure: Payment handling - IGrievanceRegistry: Grievance management - ICompliance: Compliance monitoring - IReputation: Reputation tracking - IArbitration: Dispute resolution - ISurvey: Feedback collection</p>
+</section>
+<section id="security-features" class="level3">
+<h3 class="anchored" data-anchor-id="security-features">Security Features</h3>
+<ul>
+<li>Role-based access control</li>
+<li>Stake requirements</li>
+<li>Privacy controls</li>
+<li>Reentrancy protection</li>
+<li>Secure fund management</li>
+<li>Evidence verification</li>
+<li>Proof validation</li>
+</ul>
+</section>
+</section>
+<section id="system-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="system-interaction">System Interaction</h2>
+<p>The workflow involves: 1. Template Selection &amp; Contract Creation 2. Stakeholder Validation &amp; Initial Setup 3. Work Recording &amp; Verification 4. Payment Processing &amp; Escrow 5. Compliance Monitoring &amp; Reporting 6. Grievance Handling &amp; Resolution 7. Reputation Updates &amp; Maintenance 8. Survey Collection &amp; Analysis</p>
+<p>The modular design enables: - Flexible verification methods - Customizable payment structures - Democratic governance - Protected worker rights - Systematic monitoring - Efficient dispute resolution - Privacy-preserving feedback - Comprehensive compliance tracking</p>
+<p>This comprehensive system creates a framework for fair work arrangements while maintaining transparency, protecting worker rights, and enabling efficient dispute resolution.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
